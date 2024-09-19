@@ -1,48 +1,39 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useGetUserQuery } from "../api";
-import { checkingCredentials, login, logout } from "../store/auth";
+import {  getAuthenticatedUser, login, logout } from "../store/auth";
+import Cookies from "js-cookie";
 
-export const useCheckAuth = () => {
-  const token = localStorage.getItem('token');
+export const useCheckAuth = async() => {
   const { status } = useSelector(state => state.auth);
   const dispatch = useDispatch();
 
-  const shouldSkip = !token;
-
-
-
-  const { data, isLoading, isSuccess, error } = useGetUserQuery( undefined, {
-    skip: shouldSkip,
-  });
-
   useEffect(() => {
 
-    if(!token) {
 
-      dispatch(logout({errorMessage: 'No hay token'}));
+
+
+      dispatch(getAuthenticatedUser())
+
+      
     
-    }
-    else {
 
-      dispatch(checkingCredentials());
-      if (error.status === 401) { 
-        
-        localStorage.removeItem('token');
-        const message = error.message;
-        dispatch(logout({ errorMesage: message }));
-      }
-  
-      if (isSuccess) { 
-        dispatch(login(data));
-      }
-    }
+    // if(!token) { dispatch(logout({errorMessage: 'No hay token'})); }
 
-    
-  }, [error, isSuccess, data, dispatch, token]); 
+    // else {
+
+    //   dispatch(checkingCredentials());
+
+    //   if(error) dispatch(logout({errorMessage: 'xd error xd'})); deleteToken();
+      
+    //   if(isSuccess) dispatch(login(data)); setToken(token) ;
+     
+    // }
+
+    // error, isSuccess, data, dispatch, token, currentData
+  }, []); 
 
   return {
     status,
-    isLoading,
   };
 };
+

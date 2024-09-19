@@ -4,7 +4,7 @@ import { CuatroPatitas } from './CuatroPatitas.jsx'
 import './index.css';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
+  // <React.StrictMode>
         <CuatroPatitas />
-  </React.StrictMode>,
+  // </React.StrictMode>,
 )

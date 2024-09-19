@@ -3,16 +3,19 @@ import { authenticated } from "../store/auth"
 import { MascotasPage } from "../mascotas/MascotasPage"
 import { RefugiosPage } from "../refugios/RefugiosPage"
 import { HomePage } from "../page/HomePage"
-import { DashboardRouter } from "../dashboard/DashboardRouter"
 import { LoginPage, RegisterPage } from "../auth/pages"
 import { useCheckAuth } from "../hooks/useCheckAuth"
 import { useSelector } from "react-redux"
 import { CheckingAuth } from "../auth/components/CheckingAuth"
+import { MascotaPage } from "../mascotas/MascotaPage"
+import { MiPerfilPage } from "../auth/pages/MiPerfilPage"
+import { MisMascotasPage } from "../auth/pages/MisMascotasPage"
+import { VerifyTokenPage } from "../page/VerifyTokenPage"
 
 
 export const AppRouter = () => {
 
-  const algo = useCheckAuth();
+  useCheckAuth();
 
   const { status } = useSelector(state => state.auth)
 
@@ -26,6 +29,9 @@ export const AppRouter = () => {
         <Route path="/mascotas" element={<MascotasPage />} />
         <Route path="/refugios" element={<RefugiosPage />} />
 
+        <Route path="mascota/:mascotaName" element={<MascotaPage />} />
+        <Route path="verifyToken/:token" element={<VerifyTokenPage />} />
+
         {/* Authentication Routes (Conditional rendering) */}
         {status !== authenticated.authenticated && status !== authenticated.checking && (
           <>
@@ -38,7 +44,8 @@ export const AppRouter = () => {
         {status === authenticated.authenticated && (
           <>
             <Route path="/logout" element={<Navigate to="/dashboard" />} />
-            <Route path="/dashboard" element={<DashboardRouter />} />
+            <Route path="/mi-perfil" element={<MiPerfilPage /> } />
+            <Route path='/mis-mascotas' element={<MisMascotasPage /> } />
           </>
         )}
 

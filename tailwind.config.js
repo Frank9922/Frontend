@@ -6,12 +6,18 @@ export default {
   theme: {
 
     colors: {
-      white: '#ffffff',
-      primary: "#193565",
-      shadow: '#070F1F'
+      white: "#fdfaf1",
+      primary: "#7aafa5",
+      error: '#d9534f',
+      background_error: '#fadad9'
+
     },
 
-    extend: {},
+    extend: {
+      fontFamily: {
+        dancing: ["'Dacing Script'", 'sans-serif']
+      }
+    },
   },
   plugins: [],
 }

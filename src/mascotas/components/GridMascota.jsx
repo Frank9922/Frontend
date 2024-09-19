@@ -3,7 +3,6 @@ import { CardMascota } from "./CardMascota"
 import PropTypes from 'prop-types'
 import { useState } from "react"
 import { BallTriangle } from "react-loader-spinner"
-import { filter } from "@chakra-ui/react"
 
 export const GridMascota = ( { mascotas } ) => {
 
@@ -20,10 +19,10 @@ export const GridMascota = ( { mascotas } ) => {
 
         if(items >= mascotas.length) return
 
-        setIsLoading(true); // Set loading state to true
+        setIsLoading(true); 
         setTimeout(() => {
             setItems(items + 15);
-            setIsLoading(false); // Set loading state to false after a delay
+            setIsLoading(false); 
         }, 1000);
     }
 
@@ -49,7 +48,7 @@ export const GridMascota = ( { mascotas } ) => {
             height={100}
             width={100}
             radius={5}
-            color="#193565"
+            color="#7aafa5"
             ariaLabel="ball-triangle-loading"
             />
         </motion.div>
@@ -70,12 +69,13 @@ export const GridMascota = ( { mascotas } ) => {
             ...prevFilters,
             [name]: value
         }));
-         // Setea el estado de onFilters a falso
+         
     };
+
 
   return (
     <div className="m-14">
-<div className="mb-6">
+            {/* <div className="mb-6">
                 <form onSubmit={handleFiltrar} className="flex gap-4 flex-wrap">
                     <label>
                         Edad:
@@ -108,7 +108,7 @@ export const GridMascota = ( { mascotas } ) => {
                         Filtrar
                     </button>
                 </form>
-            </div>
+            </div> */}
 
         <motion.section
         initial={{ opacity: 0, y: 30 }} 
@@ -120,12 +120,12 @@ export const GridMascota = ( { mascotas } ) => {
                 <CardMascota key={mascota.id} {...mascota} />
             ))}
         </motion.section>
-        <section className="flex justify-center flex-col mx-14">
+        <section className="flex justify-center flex-col mx-[20%] mt-[5%]">
 
         {isLoading ? (
           loadingAnimation
         ) : (
-          items <= mascotas.length && (
+          items < mascotas.length && (
             <button
               className="rounded-lg bg-primary text-white dark:bg-gray-800 m-4 p-4"
               onClick={handleButton}
